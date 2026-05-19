@@ -19,15 +19,16 @@ export class StatusBarManager {
 
   update(): void {
     const enabled = this.settingsManager.enable;
+    // 修复：状态栏显示与实际状态匹配
     this.statusItem.text = enabled
-      ? '$(copilot) Copilot Fallback: ON'
-      : '$(copilot) Copilot Fallback: OFF';
+      ? '$(copilot) OFF'
+      : '$(copilot) ON';
     this.statusItem.tooltip = enabled
       ? 'Copilot Fallback 已启用（点击禁用）'
       : 'Copilot Fallback 未启用（点击启用）';
     this.statusItem.backgroundColor = enabled
-      ? new vscode.ThemeColor('statusBarItem.warningBackground')
-      : undefined;
+      ? undefined
+      : new vscode.ThemeColor('statusBarItem.warningBackground');
   }
 
   dispose(): void {
