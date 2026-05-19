@@ -1,0 +1,84 @@
+{
+  "name": "copilot-fallback",
+  "displayName": "Copilot Fallback",
+  "description": "Copilot 额度耗尽后自动切换到自定义 API 提供内联代码补全",
+  "version": "0.0.4",
+  "publisher": "copilot-fallback",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Programming Languages", "Machine Learning"],
+  "activationEvents": ["*"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Copilot Fallback",
+      "properties": {
+        "copilotFallback.enable": {
+          "type": "boolean",
+          "default": false,
+          "description": "启用备用模式"
+        },
+        "copilotFallback.profiles": {
+          "type": "array",
+          "default": [],
+          "description": "模型配置列表"
+        },
+        "copilotFallback.activeProfileId": {
+          "type": "string",
+          "default": "",
+          "description": "当前选中的模型配置 ID"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "copilot-fallback.enable",
+        "title": "Copilot Fallback: 启用备用模式"
+      },
+      {
+        "command": "copilot-fallback.disable",
+        "title": "Copilot Fallback: 禁用备用模式"
+      },
+      {
+        "command": "copilot-fallback.toggle",
+        "title": "Copilot Fallback: 切换模式"
+      },
+      {
+        "command": "copilot-fallback.debug",
+        "title": "Copilot Fallback: 调试信息"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "copilot-fallback-sidebar",
+          "title": "Copilot Fallback",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "copilot-fallback-sidebar": [
+        {
+          "type": "webview",
+          "id": "copilot-fallback.settings",
+          "name": "设置"
+        }
+      ]
+    },
+    "configurationDefaults": {}
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-electron": "^2.3.0",
+    "typescript": "^5.3.0"
+  }
+}
